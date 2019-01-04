@@ -15,7 +15,7 @@ namespace DotnetSpider.Sample.docs
 		protected override void OnInit(params string[] arguments)
 		{
 			Downloader = new WebDriverDownloader(Browser.Chrome);
-			AddRequest("http://list.jd.com/list.html?cat=9987,653,655&page=2&JL=6_0_0&ms=5#J_main", new Dictionary<string, object> { { "name", "手机" }, { "cat3", "655" } });
+			AddRequest("http://list.jd.com/list.html?cat=9987,653,655&page=2&JL=6_0_0&ms=5#J_main", new Dictionary<string, object> { { "name", "手机" }});
 			AddPipeline(new ConsoleEntityPipeline());
 			AddEntityType<Product>();
 		}
@@ -33,7 +33,7 @@ namespace DotnetSpider.Sample.docs
 
 			[Field(Expression = "cat3", Type = SelectorType.Enviroment)]
 			[Column(Length = 20)]
-			public int CategoryId { get; set; }
+			public string CategoryId { get; set; }
 
 			[Field(Expression = "./div[1]/a/@href")]
 			[Column(Length = 20)]
@@ -47,7 +47,7 @@ namespace DotnetSpider.Sample.docs
 
 			[Field(Expression = "./div[5]/strong/a")]
 			[Column()]
-			public long CommentsCount { get; set; }
+			public string CommentsCount { get; set; }
 
 			[Field(Expression = ".//div[@class='p-shop']/@data-shop_name")]
 			[Column(Length = 200)]
