@@ -25,7 +25,9 @@ namespace DotnetSpider.Sample
 			//	ContentType = "application/json"
 			//});
 
-			AfterDownloadCompleteHandlerSpider.Run();
+			 CrawlerWholeSiteSpider.Run();
+
+			//new WebDriverDownloaderSpider().Run();
 		}
 
 

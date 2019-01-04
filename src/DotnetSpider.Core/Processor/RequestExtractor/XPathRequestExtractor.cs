@@ -33,6 +33,8 @@ namespace DotnetSpider.Core.Processor.RequestExtractor
 #endif
 				}
 			}
+			//TODO:筛选有效url
+			urls = urls.Where(t => t.StartsWith("http")).ToList();
 			return urls.Select(url => new Request(url, page.CopyProperties()));
 		}
 

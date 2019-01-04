@@ -36,7 +36,7 @@ namespace DotnetSpider.Sample.docs
 			// stop crawler if it can't get url from the scheduler after 30000 ms 当爬虫连续30秒无法从调度中心取得需要采集的链接时结束.
 			spider.EmptySleepTime = 30000;
 			// Set start/seed url
-			spider.AddRequests("http://www.cnblogs.com/");
+			spider.AddRequests("http://www.cnblogs.com");
 			// start crawler 启动爬虫
 			spider.Run();
 		}
