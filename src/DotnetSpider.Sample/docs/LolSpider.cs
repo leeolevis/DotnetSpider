@@ -9,44 +9,45 @@ using DotnetSpider.Extension.Pipeline;
 using DotnetSpider.Extraction;
 using DotnetSpider.Extraction.Model;
 using DotnetSpider.Extraction.Model.Attribute;
+using Newtonsoft.Json;
 
 namespace DotnetSpider.Sample.docs
 {
+
+	public class LolSpiderConsolePipeline : EntityPipeline
+	{
+		protected override int Process(List<IBaseEntity> items, dynamic sender = null)
+		{
+			foreach (var data in items)
+				Console.WriteLine($"{JsonConvert.SerializeObject(data)}");
+			return items.Count;
+		}
+	}
+
+	public class LolSpiderDBPipeline : EntityPipeline
+	{
+		protected override int Process(List<IBaseEntity> items, dynamic sender = null)
+		{
+			foreach (var data in items)
+				Console.WriteLine($"{JsonConvert.SerializeObject(data)}");
+			return items.Count;
+		}
+	}
+
+
 	public class LolSpider : EntitySpider
 	{
 		protected override void OnInit(params string[] arguments)
 		{
 			AddRequests("http://lol.duowan.com/LPL");
-
-			//Downloader = new HttpClientDownloader();
-			//Downloader.AddAfterDownloadCompleteHandler(new ReplaceHandler());
-
 			AddEntityType<LOLDuowan>();
-			AddPipeline(new ConsoleEntityPipeline());
-			//AddPipeline(new CollectionEntityPipeline());	
-		}
-
-
-		class ReplaceHandler : AfterDownloadCompleteHandler
-		{
-			public override void Handle(ref Response page, IDownloader downloader)
-			{
-
-			}
+			AddPipeline(new LolSpiderConsolePipeline());
 		}
 
 		[Schema("wesai", "duowan")]
 		[Entity(Expression = "//div[@class='match-container']")]
 		class LOLDuowan : BaseEntity
 		{
-			//[Column]
-			//[Field(Expression = "categoryname", Type = SelectorType.Enviroment)]
-			//public string CategoryName { get; set; }
-
-			//[Column]
-			//[Field(Expression = ".")]
-			//public string content { get; set; }
-
 			[Column]
 			[Field(Expression = "./div[1]/.")]
 			public string title { get; set; }
@@ -63,11 +64,6 @@ namespace DotnetSpider.Sample.docs
 			[Column]
 			[Field(Expression = "./div[2]/div[3]/.")]
 			public string info_status { get; set; }
-
-			//[Column]
-			//[Unique("CITYID_RUNID")]
-			//[Field(Expression = "Today", Type = SelectorType.Enviroment)]
-			//public DateTime run_id { get; set; }
 		}
 	}
 }
