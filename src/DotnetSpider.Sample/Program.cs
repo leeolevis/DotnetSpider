@@ -25,9 +25,10 @@ namespace DotnetSpider.Sample
 			//	ContentType = "application/json"
 			//});
 
-			//OrmSpider.Run();
-
-			new WebDriverDownloaderSpider().Run();
+			//AfterDownloadCompleteHandlerSpider.Run();
+			//CustomizeFormatterSpider.Run();
+			new LolSpider().Run();
+		
 		}
 
 
