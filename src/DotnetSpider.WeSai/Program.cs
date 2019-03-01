@@ -18,7 +18,9 @@ namespace DotnetSpider.WeSai
 			////Create all class
 			//db.DbFirst.CreateClassFile("d:\\DemoOracle\\1");
 
-			new LolSpider().Run();
+			new LPLSpider().Run();
+
+			new LCKSpider().Run();
 		}
 	}
 }

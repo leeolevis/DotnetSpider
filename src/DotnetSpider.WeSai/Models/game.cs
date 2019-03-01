@@ -24,6 +24,20 @@ namespace DotnetSpider.WeSai.Models
 		public int id { get; set; }
 
 		/// <summary>
+		/// Desc:分类别名
+		/// Default:
+		/// Nullable:True
+		/// </summary>           
+		public string cgname { get; set; }
+
+		/// <summary>
+		/// Desc:赛季
+		/// Default:
+		/// Nullable:True
+		/// </summary>           
+		public string season { get; set; }
+
+		/// <summary>
 		/// Desc:比赛时间
 		/// Default:
 		/// Nullable:True

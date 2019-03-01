@@ -51,7 +51,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetSpider.Broker", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetSpider.Extraction.ExcelExpression", "src\DotnetSpider.Extraction.ExcelExpression\DotnetSpider.Extraction.ExcelExpression.csproj", "{BA5C9237-1108-4070-B318-B4DCDB983EF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetSpider.WeSai", "src\DotnetSpider.WeSai\DotnetSpider.WeSai.csproj", "{96B31929-C0A8-468D-ABF8-8F4BF7D50ECF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetSpider.WeSai", "src\DotnetSpider.WeSai\DotnetSpider.WeSai.csproj", "{96B31929-C0A8-468D-ABF8-8F4BF7D50ECF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

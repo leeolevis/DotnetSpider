@@ -21,7 +21,7 @@ namespace DotnetSpider.WeSai
 		}
 	}
 
-	public class LolSpiderDBPipeline : EntityPipeline
+	public class LPLSpiderDBPipeline : EntityPipeline
 	{
 		protected override int Process(List<IBaseEntity> items, dynamic sender = null)
 		{
@@ -35,12 +35,14 @@ namespace DotnetSpider.WeSai
 
 				modelList.Add(new game()
 				{
+					cgname = "LPL",
+					season = "2019春季赛",
 					ctime = currentData,
 					utime = currentData,
 					gtime = DateTime.Parse($"{currentData.Year}-{model.info_date} {model.info_hour}"),
 					teama = model.teama,
 					teamb = model.teamb,
-					scorea =byte.Parse(model.scorea),
+					scorea = byte.Parse(model.scorea),
 					scoreb = byte.Parse(model.scoreb),
 					status = model.info_status,
 					remark = ""
@@ -51,22 +53,71 @@ namespace DotnetSpider.WeSai
 
 			db.Ado.UseTran(() =>
 			{
-				db.Ado.ExecuteCommand("truncate table game");
+				db.Ado.ExecuteCommand("DELETE FROM GAME WHERE CGNAME='LPL'");
 				db.Insertable(modelList.ToArray()).ExecuteCommand();
 			});
-			
+
 			return items.Count;
 		}
 	}
 
+	public class LCKSpiderDBPipeline : EntityPipeline
+	{
+		protected override int Process(List<IBaseEntity> items, dynamic sender = null)
+		{
+			var db = DbConfig.GetDbInstance();
+			var modelList = new List<game>();
+			var currentData = DateTime.Now;
 
-	public class LolSpider : EntitySpider
+			foreach (var data in items)
+			{
+				var model = (LOLDuowan)data;
+
+				modelList.Add(new game()
+				{
+					cgname = "LCK",
+					season = "2019春季赛",
+					ctime = currentData,
+					utime = currentData,
+					gtime = DateTime.Parse($"{currentData.Year}-{model.info_date} {model.info_hour}"),
+					teama = model.teama,
+					teamb = model.teamb,
+					scorea = byte.Parse(model.scorea),
+					scoreb = byte.Parse(model.scoreb),
+					status = model.info_status,
+					remark = ""
+				});
+
+				Console.WriteLine($"{JsonConvert.SerializeObject(data)}");
+			}
+
+			db.Ado.UseTran(() =>
+			{
+				db.Ado.ExecuteCommand("DELETE FROM GAME WHERE CGNAME='LCK'");
+				db.Insertable(modelList.ToArray()).ExecuteCommand();
+			});
+
+			return items.Count;
+		}
+	}
+
+	public class LPLSpider : EntitySpider
 	{
 		protected override void OnInit(params string[] arguments)
 		{
 			AddRequests("http://lol.duowan.com/LPL");
 			AddEntityType<LOLDuowan>();
-			AddPipeline(new LolSpiderDBPipeline());
+			AddPipeline(new LPLSpiderDBPipeline());
+		}
+	}
+
+	public class LCKSpider : EntitySpider
+	{
+		protected override void OnInit(params string[] arguments)
+		{
+			AddRequests("http://lol.duowan.com/LCK");
+			AddEntityType<LOLDuowan>();
+			AddPipeline(new LCKSpiderDBPipeline());
 		}
 	}
 
