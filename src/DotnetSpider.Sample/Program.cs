@@ -27,8 +27,8 @@ namespace DotnetSpider.Sample
 
 			//AfterDownloadCompleteHandlerSpider.Run();
 			//CustomizeFormatterSpider.Run();
-			new LolSpider().Run();
-		
+			//new LolSpider().Run();
+			new WebDriverDownloaderSpider().Run();
 		}
 
 

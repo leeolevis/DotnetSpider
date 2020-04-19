@@ -15,12 +15,12 @@ namespace DotnetSpider.Sample.docs
 		protected override void OnInit(params string[] arguments)
 		{
 			Downloader = new WebDriverDownloader(Browser.Chrome);
-			AddRequest("http://list.jd.com/list.html?cat=9987,653,655&page=2&JL=6_0_0&ms=5#J_main", new Dictionary<string, object> { { "name", "手机" }});
+			AddRequest("https://list.jd.com/list.html?cat=1713,3263,3395", new Dictionary<string, object> { { "name", "童书" }, { "cat", "幼儿启蒙" } });
 			AddPipeline(new ConsoleEntityPipeline());
 			AddEntityType<Product>();
 		}
 
-		[Target(XPaths = new[] { "//span[@class=\"p-num\"]" }, Patterns = new[] { @"&page=[0-9]+&" })]
+		//[Target(XPaths = new[] { "//span[@class=\"p-num\"]" }, Patterns = new[] { @"&page=[0-9]+&" })]//点击分页
 		[Schema("test","sku",TableNamePostfix = TableNamePostfix.Today)]
 		[Entity(Expression = "//li[@class='gl-item']/div[contains(@class,'j-sku-item')]")]
 		class Product : IBaseEntity
@@ -31,13 +31,18 @@ namespace DotnetSpider.Sample.docs
 			[Column(Length =20)]
 			public string CategoryName { get; set; }
 
-			[Field(Expression = "cat3", Type = SelectorType.Enviroment)]
+			[Field(Expression = "cat", Type = SelectorType.Enviroment)]
 			[Column(Length = 20)]
 			public string CategoryId { get; set; }
 
 			[Field(Expression = "./div[1]/a/@href")]
 			[Column(Length = 20)]
 			public string Url { get; set; }
+
+			[Field(Expression = "./div[1]/a/img/@data-lazy-img")]
+			//[Field(Expression = ".//div[@class='p-img']/a/img/@data-lazy-img")]
+			[Column(Length = 20)]
+			public string Pic { get; set; }
 
 			[Field(Expression = "./@data-sku")]
 			[Column(Length = 20)]
