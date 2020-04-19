@@ -53,7 +53,7 @@ namespace DotnetSpider.WeSai
 
 			db.Ado.UseTran(() =>
 			{
-				db.Ado.ExecuteCommand("DELETE FROM GAME WHERE CGNAME='LPL'");
+				db.Ado.ExecuteCommand("DELETE FROM WS_GAME WHERE CGNAME='LPL'");
 				db.Insertable(modelList.ToArray()).ExecuteCommand();
 			});
 

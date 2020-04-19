@@ -8,6 +8,7 @@ namespace DotnetSpider.WeSai.Models
 	///<summary>
 	///
 	///</summary>
+	[SugarTable("ws_game")]
 	public partial class game
 	{
 		public game()

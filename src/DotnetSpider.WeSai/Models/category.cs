@@ -1,13 +1,15 @@
-﻿using System;
+﻿using SqlSugar;
+using System;
 using System.Linq;
 using System.Text;
 
 namespace DotnetSpider.WeSai.Models
 {
-    ///<summary>
-    ///
-    ///</summary>
-    public partial class category
+	///<summary>
+	///
+	///</summary>
+	[SugarTable("ws_category")]
+	public partial class category
     {
            public category(){
 

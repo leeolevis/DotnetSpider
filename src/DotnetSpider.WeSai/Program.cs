@@ -20,7 +20,7 @@ namespace DotnetSpider.WeSai
 
 			new LPLSpider().Run();
 
-			new LCKSpider().Run();
+			//new LCKSpider().Run();
 		}
 	}
 }
